@@ -20,19 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Sticky Navbar Effect ---
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.querySelector('.navbar, .projects-navbar');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.padding = '15px 50px';
-            navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-            navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-        } else {
-            navbar.style.padding = '20px 50px';
-            navbar.style.background = 'rgba(26, 26, 26, 0.85)';
-            navbar.style.boxShadow = 'none';
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            const isMainNavbar = navbar.classList.contains('navbar');
+            if (window.scrollY > 50) {
+                if (isMainNavbar) {
+                    navbar.style.padding = '15px 50px';
+                }
+                navbar.style.background = 'rgba(18, 18, 18, 0.95)';
+                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                if (isMainNavbar) {
+                    navbar.style.padding = '20px 50px';
+                }
+                navbar.style.background = isMainNavbar ? 'rgba(26, 26, 26, 0.85)' : 'rgba(18, 18, 18, 0.8)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    }
 
     // --- Scroll Animations (Intersection Observer) ---
     const observerOptions = {

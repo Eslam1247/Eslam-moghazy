@@ -24,132 +24,293 @@
 
 <body>
 
-    <nav class="back-nav-container">
-        <a href="index.html" class="back-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                style="transform: rotate(180deg);">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-            Back to Overview
-        </a>
+    <nav class="projects-navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="back-link-premium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to Home</span>
+            </a>
+            <div class="projects-nav-logo">EM <span class="dot">.</span></div>
+        </div>
     </nav>
 
-    <header class="projects-page-header">
+    <header class="projects-hero">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <span class="tag">Selected Works</span>
-            <h1>Portfolio</h1>
+            <div class="hero-content-wrapper">
+                <span class="tag fade-in-up">Portfolio</span>
+                <h1 class="fade-in-up delay-100">Selected <span class="highlight">Works.</span></h1>
+                <p class="hero-subtitle fade-in-up delay-200">A collection of strategic design solutions,
+                    research-driven
+                    interfaces, and digital experiences crafted for impact.</p>
+            </div>
         </div>
     </header>
 
     <main class="projects-page-container">
-        <div class="projects-list">
-            <!-- Project 1 -->
-            <article class="project-item fade-in-scroll">
-                <div class="project-content">
-                    <h2>FinTech Mobile App</h2>
-                    <p class="project-desc">A comprehensive banking solution designed for the Gulf market, focusing on
-                        streamlining cross-border transactions and financial literacy for young professionals.</p>
-
-                    <div class="project-meta-info">
-                        <div class="meta-block">
-                            <span>Role</span>
-                            <span>Lead UX Designer</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Year</span>
-                            <span>2025</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Type</span>
-                            <span>Mobile App (iOS/Android)</span>
+        <div class="container">
+            <div class="projects-modern-grid">
+                <!-- Project 1 -->
+                <article class="modern-project-card fade-in-scroll">
+                    <div class="modern-cover-wrap">
+                        <img src="../assets/project1.png" alt="FinTech Mobile Banking" loading="lazy">
+                    </div>
+                    <div class="modern-content">
+                        <span class="modern-category-tag">Banking & Finance</span>
+                        <h2>FinTech Mobile App</h2>
+                        <p>A comprehensive banking solution designed for the Gulf market, focusing on streamlining
+                            cross-border transactions and financial empowerment.</p>
+                        <div class="modern-links">
+                            <a href="#" class="modern-link-btn primary" title="Behance Case Study">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span>Case Study</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Figma Design">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path>
+                                    <path d="M12 2h3.5A3.5 3.5 0 1 1 12 5.5V2z"></path>
+                                    <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path>
+                                </svg>
+                                <span>Figma</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Live Preview">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Live</span>
+                            </a>
                         </div>
                     </div>
+                </article>
 
-                    <div class="project-links">
-                        <a href="#" class="project-link link-primary">Live Preview</a>
-                        <a href="#" class="project-link link-secondary">View Case Study</a>
-                        <a href="#" class="project-link link-secondary">Figma File</a>
+                <!-- Project 2 -->
+                <article class="modern-project-card fade-in-scroll delay-100">
+                    <div class="modern-cover-wrap">
+                        <img src="../assets/project2.png" alt="Logistics Dashboard" loading="lazy">
                     </div>
-                </div>
-                <div class="project-image-container">
-                    <img src="../assets/project1.png" alt="FinTech Mobile App Interface" loading="lazy">
-                </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="project-item fade-in-scroll">
-                <div class="project-content">
-                    <h2>Enterprise SaaS Dashboard</h2>
-                    <p class="project-desc">A complex data-driven platform for logistics management, optimizing fleet
-                        tracking and real-time inventory updates for large-scale operations in Saudi Arabia.</p>
-
-                    <div class="project-meta-info">
-                        <div class="meta-block">
-                            <span>Role</span>
-                            <span>Senior Product Designer</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Year</span>
-                            <span>2024</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Type</span>
-                            <span>Web Application</span>
-                        </div>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="#" class="project-link link-primary">Live Preview</a>
-                        <a href="#" class="project-link link-secondary">View Case Study</a>
-                        <a href="#" class="project-link link-secondary">Figma File</a>
-                    </div>
-                </div>
-                <div class="project-image-container">
-                    <img src="../assets/project2.png" alt="Enterprise SaaS Dashboard" loading="lazy">
-                </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="project-item fade-in-scroll">
-                <div class="project-content">
-                    <h2>E-Commerce Marketplace</h2>
-                    <p class="project-desc">Redesigning the shopping experience for a leading regional retailer,
-                        resulting in a 25% increase in mobile conversion rates through intuitive navigation and
-                        localized payment flows.</p>
-
-                    <div class="project-meta-info">
-                        <div class="meta-block">
-                            <span>Role</span>
-                            <span>UX Researcher & Designer</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Year</span>
-                            <span>2023</span>
-                        </div>
-                        <div class="meta-block">
-                            <span>Type</span>
-                            <span>Mobile Web / App</span>
+                    <div class="modern-content">
+                        <span class="modern-category-tag">Enterprise & SaaS</span>
+                        <h2>Enterprise Dashboard</h2>
+                        <p>Optimizing complex fleet data into a high-performance visual dashboard for large-scale
+                            operations across Saudi Arabia.</p>
+                        <div class="modern-links">
+                            <a href="#" class="modern-link-btn primary" title="Behance Case Study">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span>Case Study</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Figma Design">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path>
+                                    <path d="M12 2h3.5A3.5 3.5 0 1 1 12 5.5V2z"></path>
+                                    <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path>
+                                </svg>
+                                <span>Figma</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Live Preview">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Live</span>
+                            </a>
                         </div>
                     </div>
+                </article>
 
-                    <div class="project-links">
-                        <a href="#" class="project-link link-primary">Live Preview</a>
-                        <a href="#" class="project-link link-secondary">View Case Study</a>
-                        <a href="#" class="project-link link-secondary">Figma File</a>
+                <!-- Project 3 -->
+                <article class="modern-project-card fade-in-scroll delay-200">
+                    <div class="modern-cover-wrap">
+                        <img src="../assets/project3.png" alt="Retail Marketplace" loading="lazy">
                     </div>
-                </div>
-                <div class="project-image-container">
-                    <img src="../assets/project3.png" alt="E-Commerce Marketplace Design" loading="lazy">
-                </div>
-            </article>
+                    <div class="modern-content">
+                        <span class="modern-category-tag">Retail & Commerce</span>
+                        <h2>Retail Marketplace</h2>
+                        <p>A next-generation shopping experience designed for regional retailers, boosting conversion
+                            through intuitive localized patterns.</p>
+                        <div class="modern-links">
+                            <a href="#" class="modern-link-btn primary" title="Behance Case Study">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span>Case Study</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Figma Design">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path>
+                                    <path d="M12 2h3.5A3.5 3.5 0 1 1 12 5.5V2z"></path>
+                                    <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path>
+                                </svg>
+                                <span>Figma</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Live Preview">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Live</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="modern-project-card fade-in-scroll delay-300">
+                    <div class="modern-cover-wrap">
+                        <img src="../assets/project1.png" alt="Travel Booking App" loading="lazy">
+                    </div>
+                    <div class="modern-content">
+                        <span class="modern-category-tag">Lifestyle & Booking</span>
+                        <h2>Travel Booking App</h2>
+                        <p>Elevating the travel experience through a high-performance booking interface for premium
+                            regional services.</p>
+                        <div class="modern-links">
+                            <a href="#" class="modern-link-btn primary" title="Behance Case Study">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span>Case Study</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Figma Design">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"></path>
+                                    <path d="M12 2h3.5A3.5 3.5 0 1 1 12 5.5V2z"></path>
+                                    <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"></path>
+                                    <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"></path>
+                                </svg>
+                                <span>Figma</span>
+                            </a>
+                            <a href="#" class="modern-link-btn" title="Live Preview">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Live</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
     </main>
 
-    <footer>
+    <footer class="projects-footer">
         <div class="container">
-            <p>&copy; 2026 Eslam Moghazy. All rights reserved.</p>
+            <div class="footer-cta-premium fade-in-scroll">
+                <span class="tag">Next Step</span>
+                <h2>Let's build something <span class="highlight">extraordinary.</span></h2>
+                <a href="mailto:eslammoghaz02y@gmail.com" class="footer-email-link">eslammoghaz02y@gmail.com</a>
+            </div>
+
+            <div class="footer-bottom-v2">
+                <div class="footer-brand-v2">
+                    <div class="footer-logo">EM <span class="dot">.</span></div>
+                    <p>&copy; 2026 Eslam Moghazy</p>
+                </div>
+
+                <div class="footer-social-minimal">
+                    <a href="https://linkedin.com/in/eslammoghazy" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://behance.net/eslammoghazy" target="_blank" aria-label="Behance">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M19.06 9H23c0 .86 0 2.11-.22 2.76-.78 2.22-3.37 2.62-5.72 2.62h-1V9zM7.5 9h-2v5.33h2.3c3.48 0 3.66-2.5 2.1-3.9 1.4-1.12.87-3.41-2.18-3.41-1.28 0-3.68.18-3.68.18V8.6h1.46v.4z">
+                            </path>
+                            <rect x="15" y="6" width="7" height="1.5"></rect>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/@eslammoghazy" target="_blank" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com/eslammoghazy" target="_blank" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/eslammoghazy" target="_blank" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 
