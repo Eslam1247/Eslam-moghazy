@@ -24,19 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (navbar) {
         window.addEventListener('scroll', () => {
-            const isMainNavbar = navbar.classList.contains('navbar');
             if (window.scrollY > 50) {
-                if (isMainNavbar) {
-                    navbar.style.padding = '15px 50px';
-                }
-                navbar.style.background = 'rgba(18, 18, 18, 0.95)';
-                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                navbar.classList.add('scrolled');
             } else {
-                if (isMainNavbar) {
-                    navbar.style.padding = '20px 50px';
-                }
-                navbar.style.background = isMainNavbar ? 'rgba(26, 26, 26, 0.85)' : 'rgba(18, 18, 18, 0.8)';
-                navbar.style.boxShadow = 'none';
+                navbar.classList.remove('scrolled');
             }
         });
     }
