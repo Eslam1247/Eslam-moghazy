@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Preloader Logic ---
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.querySelector('.preloader-progress');
+    
+    if (preloader) {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15; // Random progress increments
+            if (progress > 100) progress = 100;
+            
+            if (progressBar) progressBar.style.width = `${progress}%`;
+            
+            if (progress === 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    // Enable scrolling after preloader is gone
+                    document.body.style.overflow = 'auto';
+                }, 500);
+            }
+        }, 150);
+    } else {
+        document.body.style.overflow = 'auto';
+    }
 
     // --- Mobile Navigation ---
     const hamburger = document.querySelector('.hamburger');
@@ -74,23 +98,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Mouse Move Glow Effect for Hero Image ---
-    const heroImage = document.querySelector('.image-wrapper');
+    // --- Mouse Move Glow Effect for Hero ---
+    const heroVisual = document.querySelector('.visual-wrapper');
+    const heroSection = document.querySelector('.hero-section-premium');
+    const followGlow = document.querySelector('.glow-3');
 
-    if (heroImage) {
-        heroImage.addEventListener('mousemove', (e) => {
-            const { x, y, width, height } = heroImage.getBoundingClientRect();
+    if (heroSection && followGlow) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth) * 100;
+            const y = (clientY / window.innerHeight) * 100;
+            
+            followGlow.style.left = `${x-15}%`; // Centers the glow slightly better
+            followGlow.style.top = `${y-15}%`;
+        });
+    }
+
+    if (heroVisual) {
+        heroVisual.addEventListener('mousemove', (e) => {
+            const { x, y, width, height } = heroVisual.getBoundingClientRect();
             const centerX = x + width / 2;
             const centerY = y + height / 2;
 
-            const moveX = (e.clientX - centerX) / 20;
-            const moveY = (e.clientY - centerY) / 20;
+            const moveX = (e.clientX - centerX) / 25;
+            const moveY = (e.clientY - centerY) / 25;
 
-            heroImage.querySelector('img').style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
+            heroVisual.querySelector('img').style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
+            
+            // Also move the decorations slightly for depth
+            const dec1 = heroVisual.parentElement.querySelector('.decoration-1');
+            const dec2 = heroVisual.parentElement.querySelector('.decoration-2');
+            if(dec1) dec1.style.transform = `translate(${-moveX * 1.2}px, ${-moveY * 1.2}px)`;
+            if(dec2) dec2.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
 
-        heroImage.addEventListener('mouseleave', () => {
-            heroImage.querySelector('img').style.transform = `scale(1) translate(0px, 0px)`;
+        heroVisual.addEventListener('mouseleave', () => {
+            heroVisual.querySelector('img').style.transform = `scale(1) translate(0px, 0px)`;
+            const dec1 = heroVisual.parentElement.querySelector('.decoration-1');
+            const dec2 = heroVisual.parentElement.querySelector('.decoration-2');
+            if(dec1) dec1.style.transform = `translate(0px, 0px)`;
+            if(dec2) dec2.style.transform = `translate(0px, 0px)`;
         });
     }
 
