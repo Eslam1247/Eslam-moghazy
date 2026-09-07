@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://eslammoghazy.online/sitemap.xml
