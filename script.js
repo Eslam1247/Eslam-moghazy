@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+    const pages = [...document.querySelectorAll(".page")];
+    const progressBar = document.getElementById("progress-bar-fill");
+    const currentPageEl = document.getElementById("current-page-num");
+    const totalPageEl = document.getElementById("total-page-num");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const book = document.getElementById("book");
+
+    const isMobile = window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // --- 1. Cinematic Preloader ---
     const preloader = document.getElementById('preloader');
     const cinematicTexts = document.querySelectorAll('.cinematic-text');
@@ -17,237 +26,127 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }, 3500);
 
-    // --- 2. Floating Particles & Parallax ---
-    const particlesContainer = document.getElementById('particles-container');
-    function createParticles() {
-        for (let i = 0; i < 40; i++) {
-            let particle = document.createElement('div');
-            particle.classList.add('particle');
-            let size = Math.random() * 3 + 1; 
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.animationDuration = `${Math.random() * 15 + 10}s`; 
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            particlesContainer.appendChild(particle);
-        }
-    }
-    createParticles();
+    // ---------------------------------------------------------
+    // Fast start: no blocking preloader, no particles, no audio,
+    // no custom cursor, no magnetic effects on touch devices.
+    // ---------------------------------------------------------
 
-    // --- 3. Custom Cursor & Mobile Ripple Logic ---
-    const cursor = document.getElementById("cursor");
-    const cursorFollower = document.getElementById("cursor-follower");
-    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-    let followerX = mouseX, followerY = mouseY;
-
-    document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        if(cursor) {
-            cursor.style.left = mouseX + "px";
-            cursor.style.top = mouseY + "px";
-        }
-        
-        if(particlesContainer) {
-            const moveX = (mouseX - window.innerWidth / 2) * -0.01;
-            const moveY = (mouseY - window.innerHeight / 2) * -0.01;
-            particlesContainer.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        }
-    });
-
-    function animateFollower() {
-        followerX += (mouseX - followerX) * 0.15;
-        followerY += (mouseY - followerY) * 0.15;
-        if(cursorFollower) {
-            cursorFollower.style.left = followerX + "px";
-            cursorFollower.style.top = followerY + "px";
-        }
-        requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
-
-    const hoverTargets = document.querySelectorAll(".hover-target, a, button, .tool-tag, .skill-tags span, .social-card");
-    hoverTargets.forEach(target => {
-        target.addEventListener("mouseenter", () => cursorFollower && cursorFollower.classList.add("active"));
-        target.addEventListener("mouseleave", () => cursorFollower && cursorFollower.classList.remove("active"));
-    });
-
-    document.addEventListener("click", function (e) {
-        let ripple = document.createElement("div");
-        ripple.classList.add("click-ripple");
-        document.body.appendChild(ripple);
-        
-        let size = 40; 
-        ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = `${e.clientX - size/2}px`;
-        ripple.style.top = `${e.clientY - size/2}px`;
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-
-    // --- 4. Magnetic Effect ---
-    const magnetics = document.querySelectorAll('.magnetic');
-    magnetics.forEach((el) => {
-        el.addEventListener('mousemove', (e) => {
-            const position = el.getBoundingClientRect();
-            const x = e.pageX - position.left - position.width / 2;
-            const y = e.pageY - position.top - position.height / 2;
-            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        el.addEventListener('mouseout', () => {
-            el.style.transform = 'translate(0px, 0px)';
-        });
-    });
-
-    // --- 5. Global Audio Settings ---
-    const muteToggle = document.getElementById("mute-toggle");
-    const flipSound = document.getElementById("flipSound");
-    const hoverSound = document.getElementById("hoverSound");
-    if(flipSound) flipSound.volume = 0.4;
-    if(hoverSound) hoverSound.volume = 0.1;
-    let isMuted = false;
-
-    muteToggle.addEventListener("click", () => {
-        isMuted = !isMuted;
-        muteToggle.textContent = isMuted ? "🔇" : "🔊";
-    });
-
-    function playHoverSound() {
-        if (!isMuted && hoverSound) {
-            hoverSound.currentTime = 0;
-            hoverSound.play().catch(()=>{}); 
-        }
+    function updateProgress(index, total = pages.length) {
+        if (!progressBar || total < 2) return;
+        const percent = Math.max(0, Math.min(100, (index / (total - 1)) * 100));
+        progressBar.style.width = `${percent}%`;
+        if (currentPageEl) currentPageEl.textContent = index + 1;
+        if (totalPageEl) totalPageEl.textContent = total;
     }
 
-    hoverTargets.forEach(target => {
-        target.addEventListener("mouseenter", playHoverSound);
-    });
+    if (isMobile) {
+        // Mobile is a normal, accessible scrolling portfolio.
+        // This avoids the expensive/awkward flipbook interaction on phones.
+        document.body.classList.add("mobile-mode");
+        updateProgress(0);
 
-    // --- 6. PageFlip Initialization & Counters ---
-    const bookElement = document.getElementById("book");
-    const isMobile = window.innerWidth <= 768;
+        const observer = new IntersectionObserver((entries) => {
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-    const pageFlip = new St.PageFlip(bookElement, {
-        width: isMobile ? window.innerWidth * 0.9 : 450,
-        height: isMobile ? window.innerHeight * 0.75 : 600,
-        size: "fixed",
-        minWidth: 300,
-        maxWidth: 600,
-        minHeight: 400,
-        maxHeight: 800,
-        drawShadow: true,
-        showCover: true,
-        usePortrait: isMobile,
-        mobileScrollSupport: false
-    });
-
-    pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const currentPageEl = document.getElementById("current-page-num");
-    const totalPageEl = document.getElementById("total-page-num");
-    
-    // Set total pages on load
-    setTimeout(() => {
-        if(totalPageEl) totalPageEl.innerText = pageFlip.getPageCount();
-    }, 500);
-
-    pageFlip.on("flip", (e) => {
-        if (!isMuted && flipSound) {
-            flipSound.currentTime = 0;
-            flipSound.play().catch(()=>{});
-        }
-        
-        const totalPages = pageFlip.getPageCount();
-        const currentPage = e.data;
-        
-        // Update Progress Bar & Counter
-        const progressPercentage = (currentPage / (totalPages - 1)) * 100;
-        progressBarFill.style.width = `${progressPercentage}%`;
-        if(currentPageEl) currentPageEl.innerText = currentPage + 1;
-
-        // Active classes for stagger animations
-        document.querySelectorAll(".page").forEach((page, index) => {
-            if (index === currentPage || index === currentPage + 1) {
-                page.classList.add("is-active");
-            } else {
-                page.classList.remove("is-active");
+            if (visible) {
+                const index = pages.indexOf(visible.target);
+                if (index >= 0) {
+                    updateProgress(index);
+                    visible.target.classList.add("is-active");
+                }
             }
+        }, {
+            root: null,
+            threshold: [0.25, 0.5, 0.75]
         });
-    });
 
-    document.getElementById("prevBtn").addEventListener("click", () => pageFlip.flipPrev());
-    document.getElementById("nextBtn").addEventListener("click", () => pageFlip.flipNext());
-    
-    const restartBtn = document.getElementById("restartBtn");
-    if(restartBtn) {
-        restartBtn.addEventListener("click", () => pageFlip.turnToPage(0));
+        pages.forEach(page => observer.observe(page));
+
+        // Smoothly reveal the first screen without a long preloader.
+        if (!reduceMotion) {
+            requestAnimationFrame(() => pages[0]?.classList.add("is-active"));
+        }
+
+        return;
     }
 
-    // 3D Tilt Effect
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    document.addEventListener('mousemove', (e) => {
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
-        tiltCards.forEach(card => {
-            if (card.closest('.page.is-active') || card.closest('.page-cover.is-active')) {
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    // ---------------------------------------------------------
+    // Desktop: load PageFlip only when it is actually needed.
+    // Mobile never downloads the library.
+    // ---------------------------------------------------------
+    function loadPageFlipLibrary() {
+        return new Promise((resolve, reject) => {
+            if (window.St?.PageFlip) {
+                resolve();
+                return;
             }
+
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js";
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
         });
-    });
+    }
 
-    // --- 7. Theme Toggle ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const transitionLayer = document.getElementById('theme-transition-layer');
-    let currentTheme = 'dark';
+    loadPageFlipLibrary()
+        .then(() => {
+            if (!window.St?.PageFlip || !book) throw new Error("PageFlip unavailable");
 
-    themeToggle.addEventListener('click', (e) => {
-        const x = e.clientX;
-        const y = e.clientY;
-        
-        transitionLayer.style.transition = 'none';
-        transitionLayer.style.clipPath = `circle(0px at ${x}px ${y}px)`;
-        transitionLayer.style.backgroundColor = currentTheme === 'dark' ? '#E2E8F0' : '#020617';
-        
-        void transitionLayer.offsetWidth;
-        
-        transitionLayer.style.transition = 'clip-path 1s cubic-bezier(0.77, 0, 0.175, 1)';
-        transitionLayer.style.clipPath = `circle(150% at ${x}px ${y}px)`;
-        
-        setTimeout(() => {
-            if (currentTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'light');
-                themeToggle.innerHTML = '🌙 Dark Mode';
-                currentTheme = 'light';
-            } else {
-                document.body.removeAttribute('data-theme');
-                themeToggle.innerHTML = '☀️ Light Mode';
-                currentTheme = 'dark';
-            }
-            transitionLayer.style.clipPath = `circle(0px at ${x}px ${y}px)`;
-        }, 1000);
-    });
-
-    // --- 8. Copy Email Toast ---
-    const copyEmailBtn = document.getElementById("copyEmailBtn");
-    const toast = document.getElementById("toast");
-    
-    if(copyEmailBtn) {
-        copyEmailBtn.addEventListener("click", () => {
-            const email = copyEmailBtn.getAttribute("data-email");
-            navigator.clipboard.writeText(email).then(() => {
-                toast.classList.add("show");
-                setTimeout(() => {
-                    toast.classList.remove("show");
-                }, 3000);
+            const pageFlip = new St.PageFlip(book, {
+                width: 450,
+                height: 600,
+                size: "fixed",
+                minWidth: 320,
+                maxWidth: 600,
+                minHeight: 440,
+                maxHeight: 800,
+                drawShadow: true,
+                showCover: true,
+                usePortrait: false,
+                mobileScrollSupport: false,
+                maxShadowOpacity: 0.35,
+                flippingTime: reduceMotion ? 0 : 650
             });
-        });
-    }
 
-    // Initialize first page animation
-    setTimeout(() => {
-        document.querySelectorAll(".page")[0].classList.add("is-active");
-    }, 3500); 
+            pageFlip.loadFromHTML(pages);
+            updateProgress(0, pageFlip.getPageCount());
+
+            pageFlip.on("flip", (event) => {
+                const index = Number(event.data) || 0;
+                updateProgress(index, pageFlip.getPageCount());
+
+                pages.forEach((page, i) => {
+                    page.classList.toggle("is-active", i === index || i === index + 1);
+                });
+            });
+
+            prevBtn?.addEventListener("click", () => pageFlip.flipPrev());
+            nextBtn?.addEventListener("click", () => pageFlip.flipNext());
+
+            document.getElementById("restartBtn")?.addEventListener("click", () => {
+                pageFlip.turnToPage(0);
+            });
+
+            pages[0]?.classList.add("is-active");
+        })
+        .catch(() => {
+            // Graceful fallback if CDN is unavailable:
+            // turn the desktop book into a normal vertical page stack.
+            document.body.classList.add("fallback-mode");
+            book?.classList.add("fallback-book");
+            pages.forEach(page => page.classList.add("is-active"));
+            if (prevBtn?.parentElement) prevBtn.parentElement.style.display = "none";
+            updateProgress(0);
+        });
+
+    // Keep keyboard navigation useful on desktop.
+    document.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        if (!window.St?.PageFlip) return;
+        // PageFlip owns keyboard interaction when initialized.
+    });
 });
